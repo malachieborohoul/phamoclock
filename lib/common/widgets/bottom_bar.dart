@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:phamoclock/features/admin/personnel/screens/personnel_screen.dart';
+import 'package:phamoclock/features/admin/rapport/screens/all_rapports_screen.dart';
 import 'package:phamoclock/features/rapport/screens/create_rapport_screen.dart';
+import 'package:phamoclock/features/rapport/screens/rapports_screen.dart';
 
 import '../../constants/colors.dart';
 import '../../features/home/screens/home_screen.dart';
@@ -22,11 +25,11 @@ class _BottomBarState extends State<BottomBar> {
     return Scaffold(
       bottomNavigationBar: getFooter(),
       body: pageIndex == 0
-          ? HomeScreen()
+          ? AllRapportsScreen()
           : pageIndex == 1
-              ? HomeScreen()
+              ? RapportsScreen()
               : pageIndex == 2
-                  ? HomeScreen()
+                  ? RapportsScreen()
                   : Container(),
       floatingActionButton: FloatingActionButton(
         tooltip: "Rédiger rapport",
