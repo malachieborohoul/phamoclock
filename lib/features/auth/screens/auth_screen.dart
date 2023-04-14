@@ -1,5 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:phamoclock/features/auth/services/auth_service.dart';
 
 import '../../../common/animations/opacity_tween.dart';
 import '../../../common/animations/slide_down_tween.dart';
@@ -16,7 +18,7 @@ enum Auth {
 }
 
 class AuthScreen extends StatefulWidget {
-  static const routeName = '/auth';
+  static const routeName = '/auth-screen';
   const AuthScreen({Key? key}) : super(key: key);
 
   @override
@@ -35,6 +37,7 @@ class _AuthScreenState extends State<AuthScreen> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
+  final AuthService _authService = AuthService();
   // void signUpUser() {
   //   authService.signUpUser(
   //     context: context,
@@ -50,22 +53,17 @@ class _AuthScreenState extends State<AuthScreen> {
   //   );
   // }
 
-  // void signInUser() {
-  //   authService.signInUser(
-  //       context: context,
-  //       email: emailController.text,
-  //       password: passwordController.text,
-  //       onSuccess: () {
-  //         setState(() {
-  //           isCharging = false;
-  //         });
-  //       },
-  //       onFailed: () {
-  //         setState(() {
-  //           isCharging = false;
-  //         });
-  //       });
-  // }
+  void signInUser() {
+    _authService.login(
+        email: emailController.text,
+        password: passwordController.text,
+        context: context,
+        onSuccess: () {
+          setState(() {
+            isCharging = false;
+          });
+        });
+  }
 
   // @override
   // void initState() {
@@ -320,7 +318,7 @@ class _AuthScreenState extends State<AuthScreen> {
                                   setState(() {
                                     isCharging = true;
                                   });
-                                  // signInUser();
+                                  signInUser();
                                 }
                               },
                               child: SlideDownTween(

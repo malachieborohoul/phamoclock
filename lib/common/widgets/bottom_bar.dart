@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:phamoclock/features/admin/personnel/screens/add_personnel_screen.dart';
 import 'package:phamoclock/features/admin/personnel/screens/personnel_screen.dart';
 import 'package:phamoclock/features/admin/rapport/screens/all_rapports_screen.dart';
 import 'package:phamoclock/features/rapport/screens/create_rapport_screen.dart';
 import 'package:phamoclock/features/rapport/screens/rapports_screen.dart';
+import 'package:phamoclock/providers/user_provider.dart';
+import 'package:provider/provider.dart';
 
 import '../../constants/colors.dart';
 import '../../features/home/screens/home_screen.dart';
+
+import 'package:phamoclock/models/user.dart' as model;
 
 class BottomBar extends StatefulWidget {
   static const routeName = '/bottom-bar';
@@ -25,12 +30,14 @@ class _BottomBarState extends State<BottomBar> {
     return Scaffold(
       bottomNavigationBar: getFooter(),
       body: pageIndex == 0
-          ? AllRapportsScreen()
+          ? HomeScreen()
           : pageIndex == 1
               ? RapportsScreen()
               : pageIndex == 2
-                  ? RapportsScreen()
-                  : Container(),
+                  ? PersonnelScreen()
+                  : pageIndex == 3
+                      ? AddPersonnelScreen()
+                      : Container(),
       floatingActionButton: FloatingActionButton(
         tooltip: "Rédiger rapport",
         onPressed: () {
@@ -67,10 +74,13 @@ class _BottomBarState extends State<BottomBar> {
   }
 
   Widget getFooter() {
+    model.User userProvider = context.watch<UserProvider>().getUser;
+
     List items = [
       "assets/images/home_icon.svg",
-      "assets/images/play_icon.svg",
-      "assets/images/favorite_icon.svg",
+      "assets/images/report_icon.svg",
+      "assets/images/users_icon.svg",
+      "assets/images/add_user_icon.svg",
     ];
     var size = MediaQuery.of(context).size;
     return Stack(
@@ -99,7 +109,7 @@ class _BottomBarState extends State<BottomBar> {
                     children: [
                       SvgPicture.asset(
                         items[0],
-                        height: 17.5,
+                        height: 26,
                         color: pageIndex == 0 ? primary : grey,
                       ),
                       const SizedBox(
@@ -120,6 +130,74 @@ class _BottomBarState extends State<BottomBar> {
                     ],
                   ),
                 ),
+                userProvider.isAdmin
+                    ? GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            pageIndex = 2;
+                          });
+                        },
+                        child: Column(
+                          children: [
+                            SvgPicture.asset(
+                              items[2],
+                              height: 25,
+                              color: pageIndex == 2 ? primary : grey,
+                            ),
+                            const SizedBox(
+                              height: 15,
+                            ),
+                            pageIndex == 2
+                                ? AnimatedContainer(
+                                    duration: Duration(milliseconds: 500),
+                                    child: Container(
+                                      height: 5,
+                                      width: 20,
+                                      decoration: BoxDecoration(
+                                          color: primary,
+                                          borderRadius:
+                                              BorderRadius.circular(100)),
+                                    ),
+                                  )
+                                : Container()
+                          ],
+                        ),
+                      )
+                    : SizedBox(),
+                userProvider.isAdmin
+                    ? GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            pageIndex = 3;
+                          });
+                        },
+                        child: Column(
+                          children: [
+                            SvgPicture.asset(
+                              items[3],
+                              height: 25,
+                              color: pageIndex == 3 ? primary : grey,
+                            ),
+                            const SizedBox(
+                              height: 15,
+                            ),
+                            pageIndex == 3
+                                ? AnimatedContainer(
+                                    duration: Duration(milliseconds: 500),
+                                    child: Container(
+                                      height: 5,
+                                      width: 20,
+                                      decoration: BoxDecoration(
+                                          color: primary,
+                                          borderRadius:
+                                              BorderRadius.circular(100)),
+                                    ),
+                                  )
+                                : Container()
+                          ],
+                        ),
+                      )
+                    : SizedBox(),
                 GestureDetector(
                   onTap: () {
                     setState(() {

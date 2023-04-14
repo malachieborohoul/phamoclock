@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "300704070562",
+    "project_id": "pharmoclock-ccbc0",
+    "storage_bucket": "pharmoclock-ccbc0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:300704070562:android:fbf5d2a215b9ba94b590fb",
+        "android_client_info": {
+          "package_name": "com.example.phamoclock"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "300704070562-2ckdtpf5lotue1o04bd54dfocmkk9v3q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCns3LU-8goJ2LGD1G2iyWiIUwZxHKdVMs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "300704070562-2ckdtpf5lotue1o04bd54dfocmkk9v3q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

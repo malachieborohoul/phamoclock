@@ -56,7 +56,7 @@ class _CreateRapportScreenState extends State<CreateRapportScreen> {
                           ? Icons.toggle_off_outlined
                           : Icons.toggle_on_outlined,
                       color: primary,
-                      size: 50,
+                      size: 35,
                     ),
                   ),
                 ],
