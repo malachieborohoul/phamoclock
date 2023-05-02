@@ -1,17 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:intl/intl.dart';
 import 'package:phamoclock/common/widgets/custom_app_bar.dart';
-import 'package:phamoclock/common/widgets/custom_button_box.dart';
-import 'package:phamoclock/common/widgets/custom_heading.dart';
-import 'package:phamoclock/common/widgets/custom_rapport.dart';
-import 'package:phamoclock/common/widgets/custom_textfield_exigence.dart';
 import 'package:phamoclock/constants/colors.dart';
 import 'package:phamoclock/constants/padding.dart';
 
 class DetailsRapportScreen extends StatefulWidget {
+  final   rapport;
   const DetailsRapportScreen({
     super.key,
+    required this.rapport,
   });
   static const routeName = '/details-rapports-screen';
 
@@ -26,17 +23,17 @@ class _DetailsRapportScreenState extends State<DetailsRapportScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
 
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
-        appBar: PreferredSize(
+        appBar: const PreferredSize(
+          preferredSize: Size.fromHeight(40),
           child: CustomAppBar(
             backgroundColor: Colors.transparent,
             action: false,
+            title: "Rapport",
           ),
-          preferredSize: Size.fromHeight(40),
         ),
         body: SingleChildScrollView(
             child: Padding(
@@ -52,48 +49,49 @@ class _DetailsRapportScreenState extends State<DetailsRapportScreen> {
                 boxShadow: [
                   BoxShadow(
                       color: textBlack.withOpacity(0.12),
-                      offset: Offset(0, 3),
+                      offset: const Offset(0, 3),
                       blurRadius: 1),
                 ]),
             child: Padding(
               padding: const EdgeInsets.all(miniSpacer),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
+                children: [
                   Text(
-                    "Mardi",
-                    style: TextStyle(
+                    " ${DateFormat.MMMEd().format(widget.rapport['createdAt'].toDate())}",
+                    style: const TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.bold,
                         color: textBlack),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: miniSpacer,
                   ),
+                  const Text(
+                    "Tâches effectuées",
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
                   Text(
-                    "By default, the shadow is solid black with zero [offset], zero [blurRadius], zero [spreadRadius], and [BlurStyle.normal].",
-                    style: TextStyle(
+                    widget.rapport['report'],
+                    style: const TextStyle(
                         fontSize: 17,
                         fontWeight: FontWeight.normal,
                         color: textBlack),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: miniSpacer,
                   ),
-                  Text(
+                  const Text(
                     "Difficultés rencontrées",
-                    style: TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.bold,
-                        color: textBlack),
+                    style: TextStyle(fontWeight: FontWeight.bold),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: miniSpacer,
                   ),
                   Text(
-                    "By default, the shadow is solid black with zero [offset], zero [blurRadius], zero [spreadRadius], and [BlurStyle.normal].",
-                    style: TextStyle(
-                        fontSize: 17,
+                    widget.rapport['difficulty'],
+                    style: const TextStyle(
+                        fontSize: 12,
                         fontWeight: FontWeight.normal,
                         color: textBlack),
                   ),

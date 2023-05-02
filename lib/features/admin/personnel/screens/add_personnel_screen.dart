@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:phamoclock/common/animations/opacity_tween.dart';
 import 'package:phamoclock/common/widgets/custom_button_box.dart';
 import 'package:phamoclock/common/widgets/custom_heading.dart';
@@ -8,7 +7,7 @@ import 'package:phamoclock/constants/colors.dart';
 import 'package:phamoclock/constants/padding.dart';
 
 enum Auth {
-  sign_up,
+  signUp,
   login,
 }
 
@@ -26,9 +25,7 @@ class _AddPersonnelScreenState extends State<AddPersonnelScreen> {
   bool isCharging = false;
 
   TextEditingController cPasswordController = TextEditingController();
-  Auth _auth = Auth.login;
   final _signUpFormKey = GlobalKey<FormState>();
-  final _signInFormKey = GlobalKey<FormState>();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
@@ -219,10 +216,10 @@ class _AddPersonnelScreenState extends State<AddPersonnelScreen> {
                             children: [
                               const CustomButtonBox(title: "Ajouter"),
                               isCharging == true
-                                  ? CircularProgressIndicator(
+                                  ? const CircularProgressIndicator(
                                       color: primary,
                                     )
-                                  : Text("")
+                                  : const Text("")
                             ],
                           ),
                         )),

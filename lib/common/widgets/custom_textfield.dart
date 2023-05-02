@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../constants/colors.dart';
-import '../../constants/padding.dart';
-import '../../constants/utils.dart';
 
 class CustomTextField extends StatefulWidget {
   const CustomTextField({
@@ -37,7 +34,7 @@ class CustomTextField extends StatefulWidget {
 class _CustomTextFieldState extends State<CustomTextField> {
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: widget.height,
       width: double.infinity,
       // decoration: BoxDecoration(

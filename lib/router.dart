@@ -11,27 +11,25 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
       return MaterialPageRoute(
         builder: (_) => const BottomBar(),
       );
-      break;
     case DetailsRapportScreen.routeName:
+      var rapport = routeSettings.arguments;
       return MaterialPageRoute(
-        builder: (_) => const DetailsRapportScreen(),
+        builder: (_) =>  DetailsRapportScreen(
+          rapport: rapport,
+        ),
       );
-      break;
     case DetailsPersonnelScreen.routeName:
       return MaterialPageRoute(
         builder: (_) => const DetailsPersonnelScreen(),
       );
-      break;
-      case SplashScreen.routeName:
+    case SplashScreen.routeName:
       return MaterialPageRoute(
         builder: (_) => const SplashScreen(),
       );
-      break;
-       case AuthScreen.routeName:
+    case AuthScreen.routeName:
       return MaterialPageRoute(
         builder: (_) => const AuthScreen(),
       );
-      break;
     default:
       return MaterialPageRoute(
         builder: (_) => const Scaffold(

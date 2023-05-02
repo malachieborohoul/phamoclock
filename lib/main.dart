@@ -1,12 +1,6 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:phamoclock/common/widgets/bottom_bar.dart';
-import 'package:phamoclock/common/widgets/loader.dart';
-import 'package:phamoclock/features/auth/screens/auth_screen.dart';
-import 'package:phamoclock/features/auth/services/auth_service.dart';
 import 'package:phamoclock/features/intro/screens/splash_screen.dart';
-import 'package:phamoclock/features/spash/screens/spash_screen.dart';
 import 'package:phamoclock/firebase_options.dart';
 import 'package:phamoclock/providers/user_provider.dart';
 import 'package:phamoclock/router.dart';

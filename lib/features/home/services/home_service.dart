@@ -1,18 +1,8 @@
-import 'dart:convert';
-import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:phamoclock/common/widgets/bottom_bar.dart';
-
-import 'package:phamoclock/constants/error_handling.dart';
-import 'package:phamoclock/constants/utils.dart';
-import 'package:phamoclock/features/auth/screens/auth_screen.dart';
-import 'package:phamoclock/features/intro/screens/splash_screen.dart';
+import 'package:intl/intl.dart';
 import 'package:phamoclock/models/user.dart' as model;
-import 'package:phamoclock/providers/user_provider.dart';
-import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -20,19 +10,12 @@ class HomeService {
 
   // GET HORAIRE DATA
 
-  Future<Stream<QuerySnapshot<Map<String, dynamic>>>> getHoraireData() async {
+  Stream<QuerySnapshot<Map<String, dynamic>>> getHoraireData() {
     User currentUser = _auth.currentUser!;
 
-    model.User user = model.User(
-        email: "",
-        firstName: "",
-        lastName: "",
-        phoneNumber: "",
-        isAdmin: false,
-        todayPresenceId: "");
     late Stream<QuerySnapshot<Map<String, dynamic>>> snap;
     try {
-      snap = await _firestore
+      snap = _firestore
           .collection("presences")
           .where("uid", isEqualTo: currentUser.uid)
           .orderBy("heureArrivee", descending: true)
@@ -49,12 +32,69 @@ class HomeService {
 
     return snap;
   }
+  // SET CONNEXION DATE
+
+  Future<void> setDateConnexion(VoidCallback onSuccess) async {
+    User currentUser = _auth.currentUser!;
+
+    var today = DateFormat.yMd('fr').format(DateTime.now());
+    // var today = DateTime.now();
+    late DocumentSnapshot snap;
+    try {
+      snap = await _firestore.collection("users").doc(currentUser.uid).get();
+      var snapshot = snap.data() as Map<String, dynamic>;
+      final lastConnexion = DateFormat.yMd('fr').format( snapshot['lastConnexion'].toDate());
+      final firstConnexion = snapshot['firstConnexion'];
+
+      if (lastConnexion==today || firstConnexion) {
+        if (firstConnexion) {
+          await _firestore
+              .collection("users")
+              .doc(currentUser.uid)
+              .update({"firstConnexion": false});
+        }
+      } else {
+        await _firestore
+            .collection("users")
+            .doc(currentUser.uid)
+            .update({"lastConnexion": DateTime.now()});
+
+        
+      
+
+        final docRef = await _firestore.collection("presences").add({
+          "heureArrivee": DateTime.now(),
+          "uid": currentUser.uid,
+        });
+
+        await _firestore.collection("users").doc(currentUser.uid).update({
+          "todayPresenceId": docRef.id,
+        });
+      }
+
+      // print(today);
+      // user = model.User.fromSnap(snap);
+
+      // print(
+      //     "From setDateConnexion ${DateFormat.yMd('fr').format(snapshot['lastConnexion'].toDate())}");
+      //     print("Today: ${DateFormat.yMd('fr').format(today)}");
+
+      // await _auth.signOut();
+      onSuccess();
+    } catch (e) {}
+  }
 
   // LOGOUT USER
-
-  void logOut(VoidCallback onSuccess) async {
+  void logOut(model.User user, VoidCallback onSuccess) async {
     try {
+      print("Today: "+user.todayPresenceId);
       await _auth.signOut();
+      await _firestore
+          .collection("presences")
+          .doc(user.todayPresenceId)
+          .update({
+        "heureDepart": DateTime.now(),
+      });
       onSuccess();
     } catch (e) {}
   }

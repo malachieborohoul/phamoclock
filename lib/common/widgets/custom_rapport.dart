@@ -20,8 +20,7 @@ class CustomRapport extends StatefulWidget {
 class _CustomRapportState extends State<CustomRapport> {
   @override
   Widget build(BuildContext context) {
-    return 
-    Padding(
+    return Padding(
       padding: const EdgeInsets.only(bottom: miniSpacer),
       child: Container(
         width: double.infinity,
@@ -34,11 +33,11 @@ class _CustomRapportState extends State<CustomRapport> {
             boxShadow: [
               BoxShadow(
                   color: textBlack.withOpacity(0.12),
-                  offset: Offset(0, 3),
+                  offset: const Offset(0, 3),
                   blurRadius: 1),
             ]),
         child: Padding(
-          padding: const EdgeInsets.all(miniSpacer),
+          padding: const EdgeInsets.all(spacer - 30),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -56,7 +55,7 @@ class _CustomRapportState extends State<CustomRapport> {
                 "${widget.rapport}",
                 style: const TextStyle(
                     fontSize: 17,
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.normal,
                     color: textBlack),
               )
             ],

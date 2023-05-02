@@ -6,13 +6,13 @@ import 'package:phamoclock/common/widgets/loader.dart';
 import 'package:phamoclock/constants/colors.dart';
 import 'package:phamoclock/features/auth/screens/auth_screen.dart';
 import 'package:phamoclock/features/auth/services/auth_service.dart';
-import 'package:phamoclock/providers/user_provider.dart';
 
-import 'package:provider/provider.dart';
 
 import '../../../common/widgets/bottom_bar.dart';
 
 class MySplashScreen extends StatefulWidget {
+  const MySplashScreen({super.key});
+
   @override
   State<MySplashScreen> createState() => _MySplashScreenState();
 }
@@ -34,9 +34,9 @@ class _MySplashScreenState extends State<MySplashScreen> {
               }
             }
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return Loader();
+              return const Loader();
             }
-            return AuthScreen();
+            return const AuthScreen();
           });
     });
   }

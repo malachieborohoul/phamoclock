@@ -1,6 +1,4 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:phamoclock/features/auth/services/auth_service.dart';
 
 import '../../../common/animations/opacity_tween.dart';
@@ -10,10 +8,9 @@ import '../../../common/widgets/custom_heading.dart';
 import '../../../common/widgets/custom_textfield.dart';
 import '../../../constants/colors.dart';
 import '../../../constants/padding.dart';
-import '../../../constants/utils.dart';
 
 enum Auth {
-  sign_up,
+  signUp,
   login,
 }
 
@@ -97,7 +94,7 @@ class _AuthScreenState extends State<AuthScreen> {
             elevation: 0,
             backgroundColor: Colors.transparent,
           ),
-          body: _auth == Auth.sign_up
+          body: _auth == Auth.signUp
               ?
               //SIGNUPSCREEN
               SingleChildScrollView(
@@ -111,9 +108,9 @@ class _AuthScreenState extends State<AuthScreen> {
                           const SizedBox(
                             height: spacer,
                           ),
-                          OpacityTween(
+                          const OpacityTween(
                             begin: 0.0,
-                            child: const CustomHeading(
+                            child: CustomHeading(
                                 title: "Inscrivez vous",
                                 subTitle: "Bienvenue",
                                 color: secondary),
@@ -189,10 +186,10 @@ class _AuthScreenState extends State<AuthScreen> {
                                   children: [
                                     const CustomButtonBox(title: "S'inscrire"),
                                     isCharging == true
-                                        ? CircularProgressIndicator(
+                                        ? const CircularProgressIndicator(
                                             color: primary,
                                           )
-                                        : Text("")
+                                        : const Text("")
                                   ],
                                 ),
                               )),

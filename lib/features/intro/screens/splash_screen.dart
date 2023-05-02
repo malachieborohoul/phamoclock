@@ -1,14 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:phamoclock/common/widgets/bottom_bar.dart';
 import 'package:phamoclock/constants/colors.dart';
 import 'package:phamoclock/features/auth/screens/auth_screen.dart';
 import 'package:phamoclock/features/auth/services/auth_service.dart';
-import 'package:phamoclock/features/home/services/home_service.dart';
 import 'package:phamoclock/providers/user_provider.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:phamoclock/models/user.dart' as model;
 
 class SplashScreen extends StatefulWidget {
@@ -32,7 +29,6 @@ class _SplashScreenState extends State<SplashScreen>
   late Future<DocumentSnapshot> horaireSnap;
 
   AuthService authService = AuthService();
-  HomeService _homeService = HomeService();
 
 
   late Future<DocumentSnapshot> snap;
@@ -79,42 +75,39 @@ class _SplashScreenState extends State<SplashScreen>
 
   @override
   Widget build(BuildContext context) {
-    var height = MediaQuery.of(context).size.height;
     return Scaffold(
-      body: Container(
-        child: Center(
-            child: FutureBuilder(
-                future: userFuture,
-                builder: (context, snapshot) {
-                  if (snapshot.hasData) {
-                    return BottomBar();
-                  } else {
-                    if (!snapshot.hasError) {
-                      return Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          ScaleTransition(
-                            scale: _animation,
-                            child: const Text(
-                              "PHAMACLOCK",
-                              style: TextStyle(
-                                  color: primary,
-                                  fontSize: 50,
-                                  fontWeight: FontWeight.w600),
-                            ),
+      body: Center(
+          child: FutureBuilder(
+              future: userFuture,
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return const BottomBar();
+                } else {
+                  if (!snapshot.hasError) {
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        ScaleTransition(
+                          scale: _animation,
+                          child: const Text(
+                            "PHAMACLOCK",
+                            style: TextStyle(
+                                color: primary,
+                                fontSize: 50,
+                                fontWeight: FontWeight.w600),
                           ),
-                          // const Padding(
-                          //   padding: EdgeInsets.only(top: 100.0),
-                          //   child: Loader(),
-                          // )
-                        ],
-                      );
-                    }
-                    return AuthScreen();
+                        ),
+                        // const Padding(
+                        //   padding: EdgeInsets.only(top: 100.0),
+                        //   child: Loader(),
+                        // )
+                      ],
+                    );
                   }
-                })),
-      ),
+                  return const AuthScreen();
+                }
+              })),
     );
   }
 }

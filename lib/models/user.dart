@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
 
 class User {
   final String email;
@@ -9,7 +8,9 @@ class User {
   final String lastName;
   final String phoneNumber;
   final bool isAdmin;
+  final bool firstConnexion;
   final String todayPresenceId;
+  final String lastConnexion;
 
   User({
     required this.email,
@@ -18,6 +19,8 @@ class User {
     required this.phoneNumber,
     required this.isAdmin,
     required this.todayPresenceId,
+    required this.firstConnexion,
+    required this.lastConnexion,
   });
 
   Map<String, dynamic> toMap() {
@@ -28,6 +31,8 @@ class User {
       'phoneNumber': phoneNumber,
       'isAdmin': isAdmin,
       'todayPresenceId': todayPresenceId,
+      'firstConnexion': firstConnexion,
+      'lastConnexion': lastConnexion,
     };
   }
 
@@ -41,20 +46,36 @@ class User {
       phoneNumber: snapshot['phoneNumber'],
       isAdmin: snapshot['isAdmin'],
       todayPresenceId: snapshot['todayPresenceId'],
+      firstConnexion: snapshot['firstConnexion'],
+      lastConnexion: snapshot['lastConnexion'].toString(),
     );
   }
 
-  factory User.fromMap(Map<String, dynamic> map) {
-    return User(
-        email: map['email'] ?? '',
-        firstName: map['firstName'] ?? '',
-        lastName: map['lastName'] ?? '',
-        phoneNumber: map['phoneNumber'] ?? '',
-        isAdmin: map['isAdmin'] ?? '',
-        todayPresenceId: map['todayPresenceId'] ?? '');
-  }
+  Map<String, dynamic> toJson() => {
+        'email': email,
+        'firstName': firstName,
+        'lastName': lastName,
+        'phoneNumber': phoneNumber,
+        'isAdmin': isAdmin,
+        'todayPresenceId': todayPresenceId,
+        'firstConnexion': firstConnexion,
+        'lastConnexion': lastConnexion,
+      };
 
-  String toJson() => json.encode(toMap());
+  // factory User.fromMap(Map<String, dynamic> map) {
+  //   return User(
+  //     email: map['email'] ?? '',
+  //     firstName: map['firstName'] ?? '',
+  //     lastName: map['lastName'] ?? '',
+  //     phoneNumber: map['phoneNumber'] ?? '',
+  //     isAdmin: map['isAdmin'] ?? '',
+  //     todayPresenceId: map['todayPresenceId'] ?? '',
+  //     firstConnexion: map['firstConnexion'] ?? '',
+  //     lastConnexion: map['lastConnexion'] ?? '',
+  //   );
+  // }
 
-  factory User.fromJson(String source) => User.fromMap(json.decode(source));
+  // String toJson() => json.encode(toMap());
+
+  // factory User.fromJson(String source) => User.fromMap(json.decode(source));
 }

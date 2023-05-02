@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 import '../../constants/colors.dart';
 import '../../constants/padding.dart';
@@ -8,10 +6,10 @@ import '../../constants/padding.dart';
 class CustomDashboardCard extends StatefulWidget {
   const CustomDashboardCard(
       {super.key, required this.icon, required this.name, required this.number, required this.color});
-  final icon;
-  final name;
-  final number;
-  final color;
+  final IconData icon;
+  final String name;
+  final String number;
+  final Color color;
 
   @override
   State<CustomDashboardCard> createState() => _CustomDashboardCardState();
@@ -41,15 +39,15 @@ class _CustomDashboardCardState extends State<CustomDashboardCard> {
             ),
             Text(
               widget.name,
-              style: TextStyle(
+              style: const TextStyle(
                   fontSize: 15, fontWeight: FontWeight.bold, color: grey),
             ),
             Text(
               widget.number,
-              style: TextStyle(
+              style: const TextStyle(
                   fontSize: 35, fontWeight: FontWeight.bold, color: textBlack),
             ),
-            Icon(
+            const Icon(
               Icons.arrow_forward_rounded,
               color: textBlack,
             ),

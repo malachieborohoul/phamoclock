@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 import '../../constants/colors.dart';
 
@@ -8,7 +6,7 @@ class CustomTextFieldRapport extends StatelessWidget {
   final String hintText;
   final TextEditingController? controller;
   final TextInputType? keyboardType;
-  final maxLines;
+  final int maxLines;
   const CustomTextFieldRapport(
       {Key? key,
       required this.hintText,
@@ -31,15 +29,15 @@ class CustomTextFieldRapport extends StatelessWidget {
             hintText: hintText,
             hintStyle: TextStyle(color: secondary.withOpacity(0.3)),
             enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: grey),
+              borderSide: const BorderSide(color: grey),
               borderRadius: BorderRadius.circular(10),
             ),
             focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: primary),
+              borderSide: const BorderSide(color: primary),
               borderRadius: BorderRadius.circular(10),
             ),
             errorBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.red),
+              borderSide: const BorderSide(color: Colors.red),
               borderRadius: BorderRadius.circular(10),
             ),
           ),
@@ -47,6 +45,7 @@ class CustomTextFieldRapport extends StatelessWidget {
             if (val == null || val.isEmpty) {
               return "Entrez ${hintText}";
             }
+            return null;
           },
           maxLines: maxLines,
         ),

@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 import 'package:phamoclock/common/widgets/custom_button_box.dart';
-import 'package:phamoclock/common/widgets/custom_heading.dart';
 
 import '../../constants/colors.dart';
 
@@ -23,7 +20,7 @@ class _AlertDialogModifyRoleState extends State<AlertDialogModifyRole> {
   TextEditingController titreSectionController = TextEditingController();
 
   // PlanService planService = PlanService();
-  bool _isCharging = false;
+  final bool _isCharging = false;
 
   @override
   void dispose() {
@@ -53,7 +50,7 @@ class _AlertDialogModifyRoleState extends State<AlertDialogModifyRole> {
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Flexible(
+              const Flexible(
                   child: Text(
                 "Modifier le rôle",
                 style: TextStyle(fontSize: 20),
@@ -68,7 +65,7 @@ class _AlertDialogModifyRoleState extends State<AlertDialogModifyRole> {
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
                           color: Colors.red),
-                      child: Center(
+                      child: const Center(
                         child: Icon(
                           Icons.close,
                           color: textWhite,
@@ -77,12 +74,12 @@ class _AlertDialogModifyRoleState extends State<AlertDialogModifyRole> {
             ],
           ),
           content: _isCharging == true
-              ? Center(
+              ? const Center(
                   child: CircularProgressIndicator(
                     color: primary,
                   ),
                 )
-              : Container(
+              : SizedBox(
                   height: MediaQuery.of(context).size.height * 0.2,
                   child: Column(
                     children: [
@@ -99,24 +96,24 @@ class _AlertDialogModifyRoleState extends State<AlertDialogModifyRole> {
                             fillColor: textWhite,
                             hintStyle: TextStyle(color: Colors.grey.shade300),
                             enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.transparent),
+                              borderSide: const BorderSide(color: Colors.transparent),
                               borderRadius: BorderRadius.circular(10),
                             ),
                             focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.transparent),
+                              borderSide: const BorderSide(color: Colors.transparent),
                               borderRadius: BorderRadius.circular(10),
                             ),
                           ),
-                          hint: Text("Sélectionner une catégorie"),
+                          hint: const Text("Sélectionner une catégorie"),
                           value: 0,
-                          items: [
+                          items: const [
                             DropdownMenuItem(
-                              child: Text("Admin"),
                               value: 0,
+                              child: Text("Admin"),
                             ),
                             DropdownMenuItem(
-                              child: Text("Employé"),
                               value: 1,
+                              child: Text("Employé"),
                             ),
                           ],
                           onChanged: (int? val) {
@@ -142,7 +139,7 @@ class _AlertDialogModifyRoleState extends State<AlertDialogModifyRole> {
                   //   addSection();
                   // }
                 },
-                child: CustomButtonBox(title: "Enregistrer"))
+                child: const CustomButtonBox(title: "Enregistrer"))
           ],
         ),
       ),

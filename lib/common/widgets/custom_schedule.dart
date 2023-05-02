@@ -4,10 +4,10 @@ import '../../constants/colors.dart';
 import '../../constants/padding.dart';
 
 class CustomSchedule extends StatefulWidget {
-  final day;
-  final arivalHour;
-  final departureHour;
-  final color;
+  final String day;
+  final String arivalHour;
+  final String departureHour;
+  final Color color;
   const CustomSchedule(
       {super.key,
       required this.day,
@@ -25,7 +25,7 @@ class _CustomScheduleState extends State<CustomSchedule> {
     return Padding(
       padding: const EdgeInsets.only(bottom: miniSpacer),
       child: Container(
-        height: 50,
+        height: 70,
         decoration: BoxDecoration(
           color: widget.color.withOpacity(0.1),
           border: Border(
@@ -43,10 +43,17 @@ class _CustomScheduleState extends State<CustomSchedule> {
                 style: const TextStyle(
                     fontSize: 17, fontWeight: FontWeight.bold, color: primary),
               ),
-              Row(
+              Column(
                 children: [
                   Text(
-                    "${widget.arivalHour}-${widget.departureHour}",
+                    "A: ${widget.arivalHour}",
+                    style: TextStyle(
+                        fontSize: 17,
+                        fontWeight: FontWeight.bold,
+                        color: widget.color),
+                  ),
+                  Text(
+                    "D: ${widget.departureHour}",
                     style: TextStyle(
                         fontSize: 17,
                         fontWeight: FontWeight.bold,

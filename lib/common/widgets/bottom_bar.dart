@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:phamoclock/features/admin/personnel/screens/add_personnel_screen.dart';
 import 'package:phamoclock/features/admin/personnel/screens/personnel_screen.dart';
-import 'package:phamoclock/features/admin/rapport/screens/all_rapports_screen.dart';
 import 'package:phamoclock/features/rapport/screens/create_rapport_screen.dart';
 import 'package:phamoclock/features/rapport/screens/rapports_screen.dart';
 import 'package:phamoclock/providers/user_provider.dart';
@@ -30,13 +29,13 @@ class _BottomBarState extends State<BottomBar> {
     return Scaffold(
       bottomNavigationBar: getFooter(),
       body: pageIndex == 0
-          ? HomeScreen()
+          ? const HomeScreen()
           : pageIndex == 1
-              ? RapportsScreen()
+              ? const RapportsScreen()
               : pageIndex == 2
-                  ? PersonnelScreen()
+                  ? const PersonnelScreen()
                   : pageIndex == 3
-                      ? AddPersonnelScreen()
+                      ? const AddPersonnelScreen()
                       : Container(),
       floatingActionButton: FloatingActionButton(
         tooltip: "Rédiger rapport",
@@ -61,7 +60,8 @@ class _BottomBarState extends State<BottomBar> {
                           BorderRadius.vertical(top: Radius.circular(20)),
                       color: Colors.white,
                     ),
-                    child: CreateRapportScreen(controller: controller),
+                    child: Scaffold(
+                        body: CreateRapportScreen(controller: controller)),
                   ),
                 );
               });
@@ -92,7 +92,7 @@ class _BottomBarState extends State<BottomBar> {
             BoxShadow(
                 color: textBlack.withOpacity(0.12),
                 blurRadius: 30,
-                offset: Offset(0, -10))
+                offset: const Offset(0, -10))
           ]),
           child: Padding(
             padding: const EdgeInsets.only(left: 40, right: 40, top: 20),
@@ -117,7 +117,7 @@ class _BottomBarState extends State<BottomBar> {
                       ),
                       pageIndex == 0
                           ? AnimatedContainer(
-                              duration: Duration(milliseconds: 500),
+                              duration: const Duration(milliseconds: 500),
                               child: Container(
                                 height: 5,
                                 width: 20,
@@ -149,7 +149,7 @@ class _BottomBarState extends State<BottomBar> {
                             ),
                             pageIndex == 2
                                 ? AnimatedContainer(
-                                    duration: Duration(milliseconds: 500),
+                                    duration: const Duration(milliseconds: 500),
                                     child: Container(
                                       height: 5,
                                       width: 20,
@@ -163,7 +163,7 @@ class _BottomBarState extends State<BottomBar> {
                           ],
                         ),
                       )
-                    : SizedBox(),
+                    : const SizedBox(),
                 userProvider.isAdmin
                     ? GestureDetector(
                         onTap: () {
@@ -183,7 +183,7 @@ class _BottomBarState extends State<BottomBar> {
                             ),
                             pageIndex == 3
                                 ? AnimatedContainer(
-                                    duration: Duration(milliseconds: 500),
+                                    duration: const Duration(milliseconds: 500),
                                     child: Container(
                                       height: 5,
                                       width: 20,
@@ -197,7 +197,7 @@ class _BottomBarState extends State<BottomBar> {
                           ],
                         ),
                       )
-                    : SizedBox(),
+                    : const SizedBox(),
                 GestureDetector(
                   onTap: () {
                     setState(() {
@@ -216,7 +216,7 @@ class _BottomBarState extends State<BottomBar> {
                       ),
                       pageIndex == 1
                           ? AnimatedContainer(
-                              duration: Duration(milliseconds: 500),
+                              duration: const Duration(milliseconds: 500),
                               child: Container(
                                 height: 5,
                                 width: 20,

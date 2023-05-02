@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:phamoclock/common/widgets/custom_button_box.dart';
 import 'package:phamoclock/common/widgets/custom_heading.dart';
 import 'package:phamoclock/common/widgets/custom_rapport.dart';
-import 'package:phamoclock/common/widgets/custom_textfield_exigence.dart';
 import 'package:phamoclock/constants/colors.dart';
 import 'package:phamoclock/constants/padding.dart';
 import 'package:phamoclock/features/rapport/screens/details_rapport_screen.dart';
@@ -30,7 +26,7 @@ class _AllRapportsScreenState extends State<AllRapportsScreen> {
       onTap: () => FocusScope.of(context).unfocus(),
       child: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.all(appPadding),
+          padding: const EdgeInsets.all(appPadding),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
